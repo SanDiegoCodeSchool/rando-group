@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/SanDiegoCodeSchool/rando-group/issues"
   },
-  "homepage": "https://github.com/SanDiegoCodeSchool/rando-group#readme"
+  "homepage": "https://github.com/SanDiegoCodeSchool/rando-group#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.9.1"
+  }
 }
