@@ -6,6 +6,7 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
 const students = [
     {
@@ -69,18 +70,18 @@ function generateGroups(students, random, size) {
 }
 
 app.post("/admin", (req, res) => {
-    const { students, random, size } = req.body;
-    res.json(generateGroups(students, random, size));
+  const { students, random, size } = req.body;
+  res.json(generateGroups(students, random, size));
 });
 
 app.post("/add-student", (req, res)=> {
-    students.push(req.body);
+  students.push(req.body);
 });
 
 // Currently sending back sorted students array to root in ascending order
 app.get('/', function(req, res){
-    students.sort((a, b) => (a.skill - b.skill));
-    res.json(students);
+  students.sort((a, b) => (a.skill - b.skill));
+  res.json(students);
 });
 
 module.exports = app;
