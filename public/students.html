@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Group Generator</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Group Generator</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
     <div class="container">
-            <h1>Sign In</h1>
+      <h1>Add student</h1>
         <form>
-            <div class="form-group">
-              <label for="Name">Name</label>
-              <input type="Name" class="form-control" id="Name"  placeholder="Enter Name">
-            </div>
-            <div class="form-group">
-              <label for="Skill Level">Skill Level</label>
-              <input type="password" class="form-control" id="Skill Level" placeholder="Enter Skill Level">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-</div>
-</body>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name"  placeholder="Enter Name">
+          </div>
+          <div class="form-group">
+            <label for="skill-level">Skill Level</label>
+            <input type="number" class="form-control" id="skill-level" placeholder="Enter Skill Level">
+          </div>
+          <button id="submit" type="submit" class="btn btn-primary" onclick="studentClick(event)">Submit</button>
+        </form>
+      </div>
+
+      <script src="index.js"></script>
+  </body>
 </html>
