@@ -79,8 +79,19 @@ app.post("/add-student", (req, res)=> {
 
 // Currently sending back sorted students array to root in ascending order
 app.get('/', function(req, res){
-    students.sort((a, b) => (a.skill - b.skill));
-    res.json(students);
+    let size=2;
+    let studentSort = students.sort((a, b) => (a.skill - b.skill));
+    let num = studentSort.length/size;     //number of groups
+    let groupArray = [];
+    while (studentSort.length > size){
+        let arr = studentSort.splice(0, num );
+        groupArray.push(arr);
+      
+    }
+    groupArray.push(studentSort)
+     console.log(groupArray);
+    res.json(groupArray);
+    
 });
 
 module.exports = app;
