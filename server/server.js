@@ -93,7 +93,7 @@ app.post("/add-student", (req, res) => {
 });
 
 // Currently sending back sorted students array to root in ascending order
-app.get("/", function(req, res) {
+app.get("/students", function(req, res) {
   students.sort((a, b) => a.skill - b.skill);
   generateGroups(students, true, 2);
   res.json(students);
