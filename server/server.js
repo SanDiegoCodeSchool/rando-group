@@ -37,7 +37,6 @@ const mockData = [
   }
 ];
 
-
 function generateGroups(students, random, size) {
   if (random) {
     let studentsRemainder = students.length % size;
@@ -53,9 +52,9 @@ function generateGroups(students, random, size) {
       groups[i].push(remainingStudents[i]);
     }
     return groups;
-  }
-
-
+  } else {
+    //TODO: Distribute members by skill level.
+    // This code is not complete.
   // sort students so that we can later group by skill
   students = students.sort((a, b) => a.skill - b.skill);
 
@@ -63,23 +62,22 @@ function generateGroups(students, random, size) {
   let buckets = [[]];
   let numberOfGroups = Math.trunc(students.length / size);
 
-  for (let i = 0; i < numberOfGroups; i++) {
-    // take original group of students and divide into arrays
-    if (i === numberOfGroups - 1) {
-      buckets[i] = students.slice(i * numberOfGroups + 1);
-    } else {
-      buckets[i] = students.slice(
-        i * numberOfGroups,
-        (i + 1) * numberOfGroups + 1
-      );
+    for (let i = 0; i < numberOfGroups; i++) {
+      // take original group of students and divide into arrays
+      if (i === numberOfGroups - 1) {
+        buckets[i] = students.slice(i * numberOfGroups + 1);
+      } else {
+        buckets[i] = students.slice(
+          i * numberOfGroups,
+          (i + 1) * numberOfGroups + 1
+        );
+      }
+      // sorts the current array of students
+      buckets[i].sort(function(a, b) {
+        return 0.5 - Math.random();
+      });
     }
-    // sorts the current array of students
-    buckets[i].sort(function(a, b) {
-      return 0.5 - Math.random();
-    });
   }
-  //TODO: Evenly distibute the randomized users into groups
-
   return buckets;
 }
 
@@ -109,5 +107,3 @@ app.get("*", function(req, res){
 });
 
 module.exports = app;
-
-
