@@ -88,9 +88,7 @@ app.post("/admin", (req, res) => {
 });
 
 app.post("/add-student", (req, res) => {
-
   students.push(req.body);
-  console.log(req.body);
   res.send(req.body);
 });
 

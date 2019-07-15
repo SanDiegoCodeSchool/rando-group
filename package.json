@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/SanDiegoCodeSchool/rando-group#readme",
   "dependencies": {
-    "axios": "^0.19.0",
     "express": "^4.17.1",
     "morgan": "^1.9.1"
   }
