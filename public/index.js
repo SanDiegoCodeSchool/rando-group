@@ -1,47 +1,56 @@
-
-
 function studentClick(event){
   event.preventDefault();
-  console.log('Student was Clicked');
+
+  const url = '/add-student';
+  const data = {
+    name: document.getElementById('name').value,
+    skill: document.getElementById('skill-level').value
+  };
   
-  var url = '/add-student';
-  var data = {name: document.getElementById('name').value,
-  skill: document.getElementById('skill-level').value };
-  console.log(data);
   fetch(url, {
-    method: 'POST', // or 'PUT'
-    body: JSON.stringify(data), // data can be `string` or {object}!
-    headers:{
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
       'Content-Type': 'application/json'
     }
-  }).then(res => res.json())
-  .then(response => console.log('Success:', response))
+  })
+  .then(res => res.json())
+  .then(response => window.location.replace("group.html"))
   .catch(error => console.error('Error:', error));
 
-  window.location.replace("group.html");
 }
-
-
 
 function adminClick(event){
   event.preventDefault();
-  console.log('Admin was Clicked');
     
-  var url = '/admin';      //admin page
-  var data = {random: document.getElementById('isRandom').value,
-  size: document.getElementById('group').value };
+  const url = '/admin';
+  let random = false;
+  if (document.getElementById('isRandom').value === "on") random = true;
+  const data = {
+    random,
+    size: document.getElementById('group').value
+  };
+  
   fetch(url, {
-    method: 'POST', // or 'PUT'
-    body: JSON.stringify(data), // data can be `string` or {object}!
+    method: 'POST',
+    body: JSON.stringify(data),
     headers:{
       'Content-Type': 'application/json'
     }
   }).then(res => res.json())
-  .then(response => console.log('Success:', response))
+  .then(response => window.location.replace("group.html"))
   .catch(error => console.error('Error:', error));
-
-  window.location.replace("group.html");
-
 }
 
+function getNumberOfStudents(){
+  fetch("/students")
+  .then((response) => {
+    return response.json();
+  })
+  .then((studentData) => {
+    document.getElementById('num-students').innerHTML = studentData.length;
+  })
+  .catch(err => console.log(err));
+}
 
+getNumberOfStudents();
