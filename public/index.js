@@ -23,12 +23,17 @@ function studentClick(event){
 function adminClick(event){
   event.preventDefault();
     
-  var url = '/admin';      //admin page
-  var data = {random: document.getElementById('isRandom').value,
-  size: document.getElementById('group').value };
+  const url = '/admin';
+  let random = false;
+  if (document.getElementById('isRandom').value === "on") random = true;
+  const data = {
+    random,
+    size: document.getElementById('group').value
+  };
+  
   fetch(url, {
-    method: 'POST', // or 'PUT'
-    body: JSON.stringify(data), // data can be `string` or {object}!
+    method: 'POST',
+    body: JSON.stringify(data),
     headers:{
       'Content-Type': 'application/json'
     }
@@ -39,15 +44,13 @@ function adminClick(event){
 
 function getNumberOfStudents(){
   fetch("/students")
-  .then(function(response) {
+  .then((response) => {
     return response.json();
   })
-  .then(function(studentData) {
+  .then((studentData) => {
     document.getElementById('num-students').innerHTML = studentData.length;
   })
-  .catch((err)=>{
-    console.log(err);
-  })
+  .catch(err => console.log(err));
 }
 
 getNumberOfStudents();
