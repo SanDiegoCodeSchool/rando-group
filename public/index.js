@@ -16,7 +16,7 @@ function studentClick(event){
   })
   .then(res => res.json())
   .then(response => window.location.replace("group.html"))
-  .catch(error => console.error('Error:', error));
+  .catch(error => {console.error('Error:', error); alert('Please input a skill level between 1 and 12');});
 
 }
 
@@ -39,7 +39,7 @@ function adminClick(event){
     }
   }).then(res => res.json())
   .then(response => window.location.replace("group.html"))
-  .catch(error => console.error('Error:', error));
+  .catch(error => {console.error('Error:', error); alert('Please input a valid number of groups');});
 }
 
 function getNumberOfStudents(){
