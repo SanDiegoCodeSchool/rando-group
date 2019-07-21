@@ -53,32 +53,24 @@ function generateGroups(students, random, size) {
     }
     return groups;
   } else {
-    //TODO: Distribute members by skill level.
-    // This code is not complete.
-    // sort students so that we can later group by skill
+
     students = students.sort((a, b) => a.skill - b.skill);
 
-    // contains all groups of students
-    let buckets = [[]];
-    let numberOfGroups = Math.trunc(students.length / size);
-
-    for (let i = 0; i < numberOfGroups; i++) {
-      // take original group of students and divide into arrays
-      if (i === numberOfGroups - 1) {
-        buckets[i] = students.slice(i * numberOfGroups + 1);
-      } else {
-        buckets[i] = students.slice(
-          i * numberOfGroups,
-          (i + 1) * numberOfGroups + 1
-        );
-      }
-      // sorts the current array of students
-      buckets[i].sort(function (a, b) {
-        return 0.5 - Math.random();
-      });
+    let groups = new Array(size);
+    for(let i = 0; i < size; i++){
+        groups[i]=[];
     }
+    while(students.length > 0) {
+        for(let i=0; i<size; i++){
+            if (students.length > 0){
+                groups[i].push(students[0]);
+                students.shift();
+            }
+        }
+
+    }
+   return groups;
   }
-  return buckets;
 }
 
 app.post("/admin", (req, res) => {
