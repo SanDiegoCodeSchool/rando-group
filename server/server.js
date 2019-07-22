@@ -83,7 +83,9 @@ function generateGroups(students, random, size) {
 
 app.post("/admin", (req, res) => {
   const { random, size } = req.body;
-  if (typeof (random) === 'boolean' && /^[0-9]+$/.test(size) && parseInt(size) > 0) {
+  if (typeof (random) === 'boolean'
+    && /^[0-9]+$/.test(size)
+    && parseInt(size) > 0) {
     groups = generateGroups(students, random, size);
     res.status(200).send(groups);
   } else {
