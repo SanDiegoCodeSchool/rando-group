@@ -55,12 +55,12 @@ function generateGroups(students, random, size) {
   } else {
     //TODO: Distribute members by skill level.
     // This code is not complete.
-  // sort students so that we can later group by skill
-  students = students.sort((a, b) => a.skill - b.skill);
+    // sort students so that we can later group by skill
+    students = students.sort((a, b) => a.skill - b.skill);
 
-  // contains all groups of students
-  let buckets = [[]];
-  let numberOfGroups = Math.trunc(students.length / size);
+    // contains all groups of students
+    let buckets = [[]];
+    let numberOfGroups = Math.trunc(students.length / size);
 
     for (let i = 0; i < numberOfGroups; i++) {
       // take original group of students and divide into arrays
@@ -73,7 +73,7 @@ function generateGroups(students, random, size) {
         );
       }
       // sorts the current array of students
-      buckets[i].sort(function(a, b) {
+      buckets[i].sort(function (a, b) {
         return 0.5 - Math.random();
       });
     }
@@ -83,27 +83,45 @@ function generateGroups(students, random, size) {
 
 app.post("/admin", (req, res) => {
   const { random, size } = req.body;
-  groups = generateGroups(students, random, size);
-  res.status(200).send(groups);
+  if (typeof (random) === 'boolean'
+    && /^[0-9]+$/.test(size)
+    && parseInt(size) > 0) {
+    groups = generateGroups(students, random, size);
+    res.status(200).send(groups);
+  } else {
+    res.status(422).send('invalid data');
+  }
 });
 
 app.post("/add-student", (req, res) => {
-  students.push(req.body);
-  res.send(req.body);
+  const student = {
+    name: req.body.name,
+    skill: parseInt(req.body.skill)
+  };
+
+  if (typeof (student.skill) === 'number' &&
+    student.skill >= 1 && student.skill <= 12 &&
+    typeof (student.name) === 'string' &&
+    student.name.length <= 50) {
+    students.push(student);
+    res.send(req.body);
+  } else {
+    res.status(422).send('invalid data');
+  }
 });
 
 // Currently sending back sorted students array to root in ascending order
-app.get("/students", function(req, res) {
+app.get("/students", function (req, res) {
   students.sort((a, b) => a.skill - b.skill);
   generateGroups(students, true, 2);
   res.json(students);
 });
 
-app.get("/group", function(req, res){
+app.get("/group", function (req, res) {
   res.json(groups);
 })
 
-app.get("*", function(req, res){
+app.get("*", function (req, res) {
   res.status(404).send("error: page not found");
 });
 
