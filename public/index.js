@@ -22,6 +22,14 @@ function studentClick(event){
   });
 
 }
+function createTable(group){
+  let rows = "";
+  group.map(function (student){
+    rows += `<tr><td>${student.name}</td></tr>`
+  })
+  document.getElementById('tabledata').appendChild(rows);
+}
+
 
 function adminClick(event){
   event.preventDefault();

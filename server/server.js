@@ -111,6 +111,7 @@ app.get("/students", function (req, res) {
 
 app.get("/group", function (req, res) {
   res.json(groups);
+  console.log(groups);
 })
 
 app.get("*", function (req, res) {
