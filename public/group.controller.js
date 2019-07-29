@@ -7,11 +7,11 @@
 
 function createTable(students){
   const table = document.createElement('table');
-
+  
   const tableBody = document.createElement('tbody');
   let tr;
   let td;
-  
+
   students.map(function (student){
     tr = document.createElement('tr');
     td = document.createElement('td');

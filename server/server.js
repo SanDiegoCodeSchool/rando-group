@@ -10,32 +10,6 @@ app.use(express.static('public'));
 
 var groups = [];
 let students = [];
-const mockData = [
-  {
-    name: "student 1",
-    skill: 4
-  },
-  {
-    name: "student 2",
-    skill: 2
-  },
-  {
-    name: "student 3",
-    skill: 12
-  },
-  {
-    name: "student 4",
-    skill: 7
-  },
-  {
-    name: "student 5",
-    skill: 1
-  },
-  {
-    name: "student 6",
-    skill: 11
-  }
-];
 
 function generateGroups(students, random, size) {
   if (random) {
@@ -58,18 +32,17 @@ function generateGroups(students, random, size) {
 
     let groups = new Array(size);
     for(let i = 0; i < size; i++){
-        groups[i]=[];
+      groups[i]=[];
     }
     while(students.length > 0) {
-        for(let i=0; i<size; i++){
-            if (students.length > 0){
-                groups[i].push(students[0]);
-                students.shift();
-            }
+      for(let i=0; i<size; i++){
+        if (students.length > 0){
+          groups[i].push(students[0]);
+          students.shift();
         }
-
+      }
     }
-   return groups;
+    return groups;
   }
 }
 
@@ -100,6 +73,12 @@ app.post("/add-student", (req, res) => {
   } else {
     res.status(422).send('invalid data');
   }
+});
+
+app.post("/delete-students", (req, res) => {
+  let count = students.length;
+  students = [];
+  res.send({ "deleted": count });
 });
 
 // Currently sending back sorted students array to root in ascending order
