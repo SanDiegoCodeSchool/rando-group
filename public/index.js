@@ -23,7 +23,7 @@ function studentClick(event){
 
 }
 
-function adminClick(event){
+function createGroups(event){
   event.preventDefault();
     
   const url = '/admin';
@@ -45,6 +45,24 @@ function adminClick(event){
   .catch(error => {
     console.error('Error:', error);
     alert('Please input a valid number of groups');
+  });
+}
+
+function deleteStudents(event){
+  event.preventDefault();
+    
+  const url = '/delete-students';
+
+  fetch(url, {
+    method: 'POST',
+    headers:{
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => res.json())
+  .then(response => window.location.reload(true))
+  .catch(error => {
+    console.error('Error:', error);
   });
 }
 
