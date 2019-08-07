@@ -28,7 +28,7 @@ function createGroups(event){
     
   const url = '/admin';
   let random = false;
-  if (document.getElementById('isRandom').value === "on") random = true;
+  if (document.getElementById('isRandom').checked === 'true') {random = true;}
   const data = {
     random,
     size: document.getElementById('group').value

@@ -13,7 +13,6 @@ let students = [];
 
 function generateGroups(students, random, size) {
   if (random) {
-    console.log("from if random=true: " + random)
     let studentsRemainder = students.length % size;
     let remainingStudents = students.slice(students.length - studentsRemainder, students.length);
     let otherStudents = students.slice(0, students.length - studentsRemainder);
