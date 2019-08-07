@@ -7,6 +7,10 @@
 
 function createTable(students){
   const table = document.createElement('table');
+
+  const tableHead = document.createElement('thead');
+
+  
   
   const tableBody = document.createElement('tbody');
   let tr;
