@@ -48,6 +48,7 @@ function generateGroups(students, random, size) {
 
 app.post("/admin", (req, res) => {
   const { random, size } = req.body;
+  console.log("random: " + random)
   if (typeof (random) === 'boolean'
     && /^[0-9]+$/.test(size)
     && parseInt(size) > 0) {
@@ -83,7 +84,6 @@ app.post("/delete-students", (req, res) => {
 
 // Currently sending back sorted students array to root in ascending order
 app.get("/students", function (req, res) {
-  students.sort((a, b) => a.skill - b.skill);
   generateGroups(students, true, 2);
   res.json(students);
 });

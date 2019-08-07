@@ -1,3 +1,17 @@
 table {
-    border: 1px black solid
+    background-color: rgb(223, 223, 223);
+    margin: 0px 10px 10px 20px;
+    min-width: 300px;
+}
+
+td {
+    padding: 0px 10px 0px 10px;
+}
+
+#student-groups-title {
+    margin: 0px 0px 10px 15px; 
+}
+
+#logo-img {
+    margin: 15px 0px 0px 15px;
 }
