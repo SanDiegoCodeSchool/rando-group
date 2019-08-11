@@ -13,46 +13,56 @@ let students = [];
 
 function generateGroups(students, random, size) {
   if (random) {
-    let studentsRemainder = students.length % size;
-    let remainingStudents = students.slice(students.length - studentsRemainder, students.length);
-    let otherStudents = students.slice(0, students.length - studentsRemainder);
-    let groups = [];
-    let groupSize = otherStudents.length;
-    for (let i = 0; i < size; i++) {
-      let group = otherStudents.splice(0, groupSize / size);
-      groups.push(group);
-    }
-    for (let i = 0; i < studentsRemainder; i++) {
-      groups[i].push(remainingStudents[i]);
-    }
-    return groups;
+    students = shuffle(students);
   } else {
-
     students = students.sort((a, b) => a.skill - b.skill);
+  }
 
-    let groups = new Array(size);
-    for(let i = 0; i < size; i++){
-      groups[i]=[];
+  let groups = [];
+  for(let i = 0; i < size; i++){
+    groups[i]=[];
+  }
+
+  let groupIndex = 0;
+  let tempStudents = students.slice(0);
+
+  while(tempStudents.length > 0) {
+    groups[groupIndex].push(tempStudents.shift());
+    groupIndex++;
+    if(groupIndex >= size){
+      groupIndex = 0;
     }
-    while(students.length > 0) {
-      for(let i=0; i<size; i++){
-        if (students.length > 0){
-          groups[i].push(students[0]);
-          students.shift();
-        }
-      }
+  }
+
+  return groups;
+
+  function shuffle(studentsArray){
+    //https://stackoverflow.com/a/2450976/4539316 Fisher-Yates shuffle
+    var currentIndex = studentsArray.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = studentsArray[currentIndex];
+      studentsArray[currentIndex] = studentsArray[randomIndex];
+      studentsArray[randomIndex] = temporaryValue;
     }
-    return groups;
+
+    return studentsArray;
   }
 }
 
 app.post("/admin", (req, res) => {
   const { random, size } = req.body;
-  console.log("random: " + random)
   if (typeof (random) === 'boolean'
     && /^[0-9]+$/.test(size)
     && parseInt(size) > 0) {
-    groups = generateGroups(students, random, size);
+    groups = generateGroups(students, random, parseInt(size));
     res.status(200).send(groups);
   } else {
     res.status(422).send('invalid data');
@@ -82,9 +92,7 @@ app.post("/delete-students", (req, res) => {
   res.send({ "deleted": count });
 });
 
-// Currently sending back sorted students array to root in ascending order
 app.get("/students", function (req, res) {
-  generateGroups(students, true, 2);
   res.json(students);
 });
 
