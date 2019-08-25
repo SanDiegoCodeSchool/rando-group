@@ -15,7 +15,7 @@ function studentClick(event){
     }
   })
   .then(res => res.json())
-  .then(response => window.location.replace("group.html"))
+  .then(response => window.location.replace("success.html"))
   .catch(error => {
     console.error('Error:', error);
     alert('Please input a skill level between 1 and 12');
