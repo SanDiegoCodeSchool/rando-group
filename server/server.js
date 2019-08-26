@@ -93,6 +93,7 @@ app.post("/delete-students", (req, res) => {
 });
 
 app.get("/students", function (req, res) {
+  console.log("students", students)
   res.json(students);
 });
 

@@ -6,12 +6,11 @@
     .catch(err => console.log('feels bad no data'));
 
 function createTable(students){
+  console.log(students);
   const table = document.createElement('table');
 
   const tableHead = document.createElement('thead');
 
-  
-  
   const tableBody = document.createElement('tbody');
   let tr;
   let td;
