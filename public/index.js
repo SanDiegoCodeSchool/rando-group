@@ -71,7 +71,18 @@ function getNumberOfStudents(){
     return response.json();
   })
   .then((studentData) => {
-    document.getElementById('num-students').innerHTML = studentData.length;
+    let numStudents = document.getElementById('num-students');
+    if (numStudents){
+      numStudents.innerHTML = studentData.length;
+    }
+    let list = document.getElementById('student-list');
+    if (list){
+      studentData.map(student => {
+        let listItem = document.createElement("li");
+        listItem.innerText = student.name;
+        list.appendChild(listItem);
+      });
+    }
   })
   .catch(err => console.log(err));
 }

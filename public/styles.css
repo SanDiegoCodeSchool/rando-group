@@ -1,6 +1,6 @@
 table {
     background-color: rgb(223, 223, 223);
-    margin: 0px 10px 10px 20px;
+    margin: 0px 10px 10px 0px;
     min-width: 300px;
 }
 
@@ -9,7 +9,7 @@ td {
 }
 
 #student-groups-title {
-    margin: 0px 0px 10px 15px; 
+    margin: 0px 0px 10px 15px;
 }
 
 #logo-img {
