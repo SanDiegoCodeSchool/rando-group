@@ -1,20 +1,11 @@
-  fetch('/group')
-    .then(res => res.json())
-    .then((result)=> {
-      let groups = result.groups
-      groups.map(group => createTable(group));
-    document.getElementById('timestamp').innerHTML=result.lastGenerated.toString();
-    })
-    .catch(err => console.log('feels bad no data'));
-
+let timeGenerated = "";
+const timeStamp = document.createElement('div');
+  
 function createTable(students){
   const table = document.createElement('table');
-
   const tableHead = document.createElement('thead');
-
-  
-  
   const tableBody = document.createElement('tbody');
+  
   let tr;
   let td;
 
@@ -29,4 +20,15 @@ function createTable(students){
   
   table.appendChild(tableBody)
   document.body.appendChild(table);
+  timeStamp.innerHTML = timeGenerated;
+  document.body.appendChild(timeStamp);
 }
+
+fetch('/group')
+  .then(res => res.json())
+  .then((result)=> {
+    let groups = result.groups
+    timeGenerated = result.lastGenerated.toString();
+    groups.map(group => createTable(group));
+  })
+  .catch(err => console.log(err));
