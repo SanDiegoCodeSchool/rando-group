@@ -1,7 +1,9 @@
   fetch('/group')
     .then(res => res.json())
     .then((result)=> {
-      result.map(group => createTable(group));
+      let groups = result.groups
+      groups.map(group => createTable(group));
+    document.getElementById('timestamp').innerHTML=result.lastGenerated.toString();
     })
     .catch(err => console.log('feels bad no data'));
 

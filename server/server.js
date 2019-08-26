@@ -10,6 +10,7 @@ app.use(express.static('public'));
 
 var groups = [];
 let students = [];
+let lastGenerated = new Date();
 
 function generateGroups(students, random, size) {
   if (random) {
@@ -33,7 +34,7 @@ function generateGroups(students, random, size) {
       groupIndex = 0;
     }
   }
-
+  lastGenerated = new Date();
   return groups;
 
   function shuffle(studentsArray){
@@ -89,6 +90,7 @@ app.post("/add-student", (req, res) => {
 app.post("/delete-students", (req, res) => {
   let count = students.length;
   students = [];
+  groups = [];
   res.send({ "deleted": count });
 });
 
@@ -97,7 +99,7 @@ app.get("/students", function (req, res) {
 });
 
 app.get("/group", function (req, res) {
-  res.json(groups);
+  res.json({groups, lastGenerated});
 })
 
 app.get("*", function (req, res) {
